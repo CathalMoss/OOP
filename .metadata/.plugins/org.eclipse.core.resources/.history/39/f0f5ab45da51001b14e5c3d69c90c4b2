@@ -1,0 +1,16 @@
+package ie.gmit.sw;
+import java.io.File;
+public class Filter extends Thread{
+
+	private String dir;
+	public Filter(String directory) {
+		dir = directory;
+	}
+	
+	
+	public void run() {
+		File path = new File(dir);
+		
+		File fileList[] = path.listFiles();
+	}
+}

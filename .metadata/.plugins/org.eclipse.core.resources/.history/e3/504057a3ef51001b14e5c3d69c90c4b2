@@ -1,0 +1,59 @@
+package ie.gmit.sw;
+
+//imports
+import java.util.Scanner;
+
+/**
+ * @author Cathal moss
+ * @version 1.0
+ * @since 1.8
+ * 
+ * 
+ * Test test test
+ * 
+ * */
+
+
+/**
+ * */
+
+public class Runner {
+	private int input = 0;
+	public void go() throws Exception{
+		//new Thread
+		Thread T = new Thread();
+		T.start();
+		//options for the menu
+		System.out.println("**Image Filtering **");
+		System.out.println("1) Enter Images");
+		System.out.println("2) Enter Single Image");
+		System.out.println("3) Quit");
+		Scanner sc = new Scanner(System.in);
+		
+		input = sc.nextInt();//Input
+		//while loop for the menu
+		while(input == 3)) {
+			if(input == 1) { //user enters 1
+				System.out.println("Enter Directory"); //tell user to enter directory
+				String dir = sc.next();
+				Filter F = new Filter(dir); //thread 1
+				F.start();
+				F.join();
+			}
+			if(input == 2) { //user enters 2
+				System.out.println("Enter Directory(Single)"); //tell user to enter directory
+				String dir = sc.next(); 
+				Filter F2 = new Filter(dir);  //new thread
+				F2.start();
+				F2.join();
+			}
+		}//while
+		//T.stop();
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new Runner().go();
+		
+	}
+
+}

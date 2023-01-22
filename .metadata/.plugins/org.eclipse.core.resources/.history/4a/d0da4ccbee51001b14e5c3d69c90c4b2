@@ -1,0 +1,12 @@
+package ie.gmit.sw;
+
+public class Menu {
+
+	public Menu() {
+		run();
+	}
+
+	public void run() {
+		System.out.println("Test");
+	}
+}

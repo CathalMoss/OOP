@@ -1,0 +1,49 @@
+package ie.gmit.sw;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+public class Filter extends Thread{
+
+	private String dir;
+	private int filter[][];
+	private int counter = 0;
+	public Filter(String directory) {
+		dir = directory;
+	}
+	
+	
+	public void run() {
+		File path = new File(dir);
+		
+		File fileList[] = path.listFiles();
+		
+		for(File file : fileList) {
+			counter++;
+			if(counter == 1) {
+				int[][] filter = {{-1,-2,-1},{0,0,0}, {1,2,1}};
+			}
+			
+			try {
+				BufferedImage image = ImageIO.read(new File(file.getAbsolutePath()));
+				
+				for(int y = 0; y < image.getHeight(); y++) {
+					for (int x =0; x < image.getWidth(); x++) {
+						int red=0,green=0,blue=0;
+						for(int row=0; row <filter.length; row++) {
+							
+						}
+					}
+				}
+				
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+}

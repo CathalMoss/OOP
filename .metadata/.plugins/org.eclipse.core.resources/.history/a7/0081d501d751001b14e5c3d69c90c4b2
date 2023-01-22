@@ -1,0 +1,22 @@
+package ie.gmit.sw;
+
+public class Runner {
+
+	public static void main(String[] args) {
+		
+		/**
+		 * @author Cathal moss
+		 * @version 1.0
+		 * @since 1.8
+		 * 
+		 * 
+		 * Test test test
+		 * 
+		 * */
+		
+		
+		/**
+		 * */
+	}
+
+}

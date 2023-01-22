@@ -1,0 +1,106 @@
+package ie.gmit.sw;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+public class Filter extends Thread{
+
+	private String dir;
+	private int filter[][];
+	private int counter = 0;
+	private int fileNumber = 0;
+	public Filter(String directory) {
+		dir = directory;
+	}
+	
+	
+	public void run() {
+		File path = new File(dir);
+		
+		File fileList[] = path.listFiles();
+		
+		for(File file : fileList) {
+			counter++;
+			fileNumber++;
+			
+			
+			
+			try {
+				BufferedImage image = ImageIO.read(new File(file.getAbsolutePath()));
+				
+				for(int y = 0; y < image.getHeight(); y++) {
+					for (int x =0; x < image.getWidth(); x++) {
+						int red=0,green=0,blue=0;
+						if(counter == 2) {
+							int[][] sobel = {{-1,-2,-1},{0,0,0}, {1,2,1}};
+							filter = sobel;
+						}
+						if(counter == 1) {
+							int[][] sobel = {{0,-1,0},{-1,4,-1}, {0,-1,0}};
+							filter = sobel;
+						}
+						for(int row=0; row < filter.length; row++) {
+							for(int col =0; col <filter[row].length; col++ ) {
+								int RGB = image.getRGB(x, y);
+								int R = (RGB >> 16) & 0xff;//Red Value
+								int G = (RGB >> 8) & 0xff;//GReen Value
+								int B = (RGB) & 0xff;//Blue Value
+								
+								
+								red += (R*filter[row][col]);
+								green += (G*filter[row][col]);
+								blue += (B*filter[row][col]);
+	
+							}
+						}
+						
+						red = red*-1;
+						green = green*-1;
+						blue = blue *-1;
+						int r,g,b;
+						//The value is truncated to 0 and 255 if it goes beyond
+//						r = Math.min(Math.max((int)(red), 0), 255);
+//						g = Math.min(Math.max((int)(green), 0), 255);
+//						b = Math.min(Math.max((int)(blue), 0), 255);
+						
+						if(red > 255) {
+							red= 255;
+						}
+						else if (red < 0) {
+							red =0;
+						}
+						else if (green > 255) {
+							green =255;
+						}
+						else if (green < 0) {
+							green =0;
+						}
+						else if (blue > 255) {
+							blue =255;
+						}
+						else if (blue < 0) {
+							blue =0;
+						}
+						
+						
+						//Put the three rgb colours into one 
+						int rgb = 0;
+						rgb = rgb | (r << 16);
+						rgb = rgb | (g << 8);
+						rgb = rgb | b;
+						
+						image.setRGB(x, y, rgb);
+					}
+				}
+				ImageIO.write(image, "png", new File(dir+ "\\" + "image" + fileNumber + ".png"));
+						
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+}

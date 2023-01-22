@@ -1,0 +1,33 @@
+package ie.gmit.sw;
+
+public class Runner {
+	private int input = 0;
+	public void go(){
+		Thread T = new Thread();
+		
+		
+		Scanner sc = new Scanner(System.in);
+		input = input.nextInt();//Input
+		while() {
+			if
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Runner().go();
+		/**
+		 * @author Cathal moss
+		 * @version 1.0
+		 * @since 1.8
+		 * 
+		 * 
+		 * Test test test
+		 * 
+		 * */
+		
+		
+		/**
+		 * */
+	}
+
+}
